@@ -1,7 +1,7 @@
 import { Avatar, Box, Divider, Drawer, Icon, List, ListItemButton, ListItemIcon, ListItemText, useMediaQuery, useTheme } from '@mui/material'
 import React from 'react'
 import { useMatch, useNavigate, useResolvedPath } from 'react-router-dom'
-import { useDrawerContext } from '../../contexts'
+import { useAppThemeContext, useDrawerContext } from '../../contexts'
 
 interface IListItemLinkProps {
     label: string //nome
@@ -42,6 +42,7 @@ export const MenuLateral: React.FC<IMenuLateral> = ({ children }) => {
     //se a tela estiver menor que sm retorna true
     const smDown = useMediaQuery(theme.breakpoints.down('sm'))
     const { isDrawerOpen, toggleDrawerOpen, drawerOptions } = useDrawerContext()
+    const { toggleTheme } = useAppThemeContext()
 
     return (
         <>
@@ -70,6 +71,16 @@ export const MenuLateral: React.FC<IMenuLateral> = ({ children }) => {
                                 />
                             ))}
 
+                        </List>
+                    </Box>
+                    <Box>
+                        <List component='nav'>
+                            <ListItemButton onClick={toggleTheme}>
+                                <ListItemIcon>
+                                    <Icon>dark_mode</Icon>
+                                </ListItemIcon>
+                                <ListItemText primary='Alternar tema' />
+                            </ListItemButton>
                         </List>
                     </Box>
                 </Box>
