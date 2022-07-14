@@ -29,7 +29,7 @@ export const LayoutBaseDePagina: React.FC<ILayoutBaseDePaginaProps> = ({ childre
                 <Typography
                     whiteSpace='nowrap'
                     overflow='hidden'
-                    textOverflow='elipses'
+                    textOverflow='ellipsis'
                     variant={smDown ? 'h5' : mdDown ? 'h4' : 'h3'}>
                     {titulo}
                 </Typography>
