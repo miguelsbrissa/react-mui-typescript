@@ -99,7 +99,7 @@ export const FerramentasDeDetalhe: React.FC<IFerramentasDeDetalheProps> = ({
                             whiteSpace='nowrap'
                             overflow='hidden'
                             textOverflow='ellipsis'
-                        >Salvar e voltar</Typography>
+                        >Salvar e fechar</Typography>
                     </Button>
                 )
             }
