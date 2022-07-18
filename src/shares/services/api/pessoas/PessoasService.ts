@@ -1,14 +1,14 @@
-import { Environment } from "../../../environment"
-import { Api } from "../axios-config"
+import { Environment } from '../../../environment'
+import { Api } from '../axios-config'
 
-interface IListagemPessoa {
+export interface IListagemPessoa {
     id: number
     nomeCompleto: string
     email: string
     cidadeId: number
 }
 
-interface IDetalhePessoa {
+export interface IDetalhePessoa {
     id: number
     nomeCompleto: string
     email: string
@@ -32,7 +32,7 @@ const getAll = async (page = 1, filter = ''): Promise<TPessoasComTotalCount | Er
             }
         }
 
-        return new Error('Erro ao lista os registros')
+        return new Error('Erro ao listar os registros')
     } catch (error) {
         console.error(error)
         return new Error((error as { message: string }).message || 'Erro ao listar os registros.')
@@ -88,7 +88,6 @@ const deleteById = async (id: number): Promise<void | Error> => {
         const urlRelative = `/pessoas/${id}`
         await Api.delete(urlRelative)
 
-        return new Error('Erro ao deletar um registro.')
     } catch (error) {
         console.error(error)
         return new Error((error as { message: string }).message || 'Erro ao deletar um registro.')
