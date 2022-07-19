@@ -2,9 +2,9 @@
   "pessoas": [
     {
       "id": 1,
+      "nomeCompleto": "David Bowman",
       "email": "davidbowman@gmail.com",
-      "cidadeId": 1,
-      "nomeCompleto": "David Bowman"
+      "cidadeId": 1
     },
     {
       "id": 2,
@@ -68,9 +68,9 @@
     },
     {
       "id": 12,
+      "nomeCompleto": "Sylvestri Yarrow",
       "email": "sylyarrow@gmail.com",
-      "cidadeId": 1,
-      "nomeCompleto": "Sylvestri Yarrow"
+      "cidadeId": 1
     },
     {
       "id": 13,
@@ -83,6 +83,12 @@
       "email": "stellangios@gmail.com",
       "cidadeId": 1,
       "nomeCompleto": "Stellan Gios"
+    },
+    {
+      "nomeCompleto": "Harry Potter ",
+      "email": "potterharry@gmail.com ",
+      "cidadeId": "1",
+      "id": 15
     }
   ]
 }

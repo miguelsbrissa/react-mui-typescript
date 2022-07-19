@@ -41,8 +41,7 @@ const getAll = async (page = 1, filter = ''): Promise<TPessoasComTotalCount | Er
 
 const getById = async (id: number): Promise<IDetalhePessoa | Error> => {
     try {
-        const urlRelative = `/pessoas?${id}`
-        const { data } = await Api.get(urlRelative)
+        const { data } = await Api.get(`/pessoas/${id}`)
 
         if (data) {
             return data
@@ -76,7 +75,7 @@ const updateById = async (pessoa: IDetalhePessoa): Promise<void | Error> => {
         const urlRelative = `/pessoas/${pessoa.id}`
         await Api.put(urlRelative, pessoa)
 
-        return new Error('Erro ao atualizar um registro.')
+        
     } catch (error) {
         console.error(error)
         return new Error((error as { message: string }).message || 'Erro ao atualizar um registro.')

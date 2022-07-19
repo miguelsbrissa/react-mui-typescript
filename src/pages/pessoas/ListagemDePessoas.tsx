@@ -66,6 +66,7 @@ export const ListagemDePessoas: React.FC = () => {
         <LayoutBaseDePagina titulo='Listagem de pessoas'
             barraDeFerramentas={<FerramentasDaListagem
                 textoBotaoNovo='Nova'
+                aoClicarEmNovo={() => navigate('/pessoas/detalhe/nova')}
                 mostrarInputBusca
                 textoDaBusca={busca}
                 aoMudarTextoDeBusca={texto => setSearchParams({ busca: texto, pagina: '1' }, { replace: true })}
