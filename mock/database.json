@@ -89,6 +89,18 @@
       "email": "potterharry@gmail.com ",
       "cidadeId": "1",
       "id": 15
+    },
+    {
+      "nomeCompleto": "R2D2",
+      "email": "r2d2@gmail.com",
+      "cidadeId": "1",
+      "id": 16
+    },
+    {
+      "id": 17,
+      "nomeCompleto": "C3PO",
+      "email": "c3po@gmail.com",
+      "cidadeId": "1"
     }
   ]
 }
