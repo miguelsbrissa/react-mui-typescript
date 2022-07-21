@@ -82,7 +82,7 @@ export const ListagemDeCidades: React.FC = () => {
                         {
                             rows.map(row => (
                                 <TableRow key={row.id}>
-                                    <TableCell>
+                                    <TableCell width={100}>
                                         <IconButton size='small' onClick={() => handleDelete(row.id)}>
                                             <Icon>delete</Icon>
                                         </IconButton>
