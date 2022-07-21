@@ -108,5 +108,27 @@
       "nomeCompleto": "Sabine Wren",
       "id": 18
     }
+  ],
+  "cidades": [
+    {
+      "id": 1,
+      "nome": "Star Wars"
+    },
+    {
+      "id": 2,
+      "nome": "Dune "
+    },
+    {
+      "id": 3,
+      "nome": "Mundo Novo"
+    },
+    {
+      "id": 4,
+      "nome": "2001: Odisseia no espaço"
+    },
+    {
+      "nome": "Adarlan",
+      "id": 5
+    }
   ]
 }

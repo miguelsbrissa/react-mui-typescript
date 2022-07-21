@@ -1,26 +1,22 @@
-import { Box, Grid, LinearProgress, Paper, Typography } from '@mui/material'
-import { useEffect, useState } from 'react'
-import { useNavigate, useParams } from 'react-router-dom'
+import { Box, Paper, Grid, LinearProgress, Typography } from '@mui/material'
 import { FerramentasDeDetalhe } from '../../shares/components'
-import { VTextField, VForm, useVForm, IVFormErrors } from '../../shares/forms'
+import { IVFormErrors, useVForm, VForm, VTextField } from '../../shares/forms'
 import { LayoutBaseDePagina } from '../../shares/layouts'
-import { PessoasService } from '../../shares/services/api/pessoas/PessoasService'
 import * as yup from 'yup'
 import '../../shares/forms/TraducoesYup'
+import { useEffect, useState } from 'react'
+import { useParams, useNavigate } from 'react-router-dom'
+import { CidadesService } from '../../shares/services/api/cidades/CidadesServcice'
 
 interface IFormData {
-    email: string
-    cidadeId: number
-    nomeCompleto: string
+    nome: string
 }
 
 const formValidationSchema: yup.SchemaOf<IFormData> = yup.object().shape({
-    nomeCompleto: yup.string().min(3).required(),
-    email: yup.string().email().required(),
-    cidadeId: yup.number().integer().positive().required()
+    nome: yup.string().min(3).required()
 })
 
-export const DetalhesDePessoas: React.FC = () => {
+export const DetalhesDeCidades: React.FC = () => {
     const { id = 'nova' } = useParams<'id'>()
     const navigate = useNavigate()
     const { formRef, save, saveAndClose, isSaveAndClose } = useVForm()
@@ -32,60 +28,57 @@ export const DetalhesDePessoas: React.FC = () => {
         if (id !== 'nova') {
             setIsLoading(true)
 
-            PessoasService.getById(Number(id))
+            CidadesService.getById(Number(id))
                 .then((result) => {
                     setIsLoading(false)
 
                     if (result instanceof Error) {
                         alert(result.message)
-                        navigate('/pessoas')
+                        navigate('/cidades')
                     } else {
-                        setNome(result.nomeCompleto)
+                        setNome(result.nome)
                         formRef.current?.setData(result)
                     }
                 })
         } else {
             formRef.current?.setData({
-                nomeCompleto: '',
-                email: '',
-                cidadeId: ''
+                nome: ''
             })
         }
     }, [id])
 
-
     const handleSave = (dados: IFormData) => {
         formValidationSchema
             .validate(dados, { abortEarly: false })
-            .then((dadosValidados) =>{
+            .then((dadosValidados) => {
                 if (id === 'nova') {
-                    PessoasService.create(dadosValidados)
+                    CidadesService.create(dadosValidados)
                         .then((result) => {
                             setIsLoading(false)
                             if (result instanceof Error) {
                                 alert(result.message)
                             } else {
                                 if (isSaveAndClose()) {
-                                    navigate('/pessoas')
+                                    navigate('/cidades')
                                 } else {
-                                    navigate(`/pessoas/detalhe/${result}`)
+                                    navigate(`/cidades/detalhe/${result}`)
                                 }
                             }
                         })
                 } else {
-                    PessoasService.updateById({ id: Number(id), ...dadosValidados })
+                    CidadesService.updateById({ id: Number(id), ...dadosValidados })
                         .then((result) => {
                             if (result instanceof Error) {
                                 alert(result.message)
                             } else {
                                 if (isSaveAndClose()) {
-                                    navigate('/pessoas')
+                                    navigate('/cidades')
                                 }
                             }
                         })
                 }
             })
-            .catch((errors: yup.ValidationError) =>{
+            .catch((errors: yup.ValidationError) => {
                 setIsLoading(false)
                 const validationErrors: IVFormErrors = {}
 
@@ -96,26 +89,25 @@ export const DetalhesDePessoas: React.FC = () => {
                 })
 
                 formRef.current?.setErrors(validationErrors)
-            }) 
+            })
     }
 
     const handleDelete = (id: number) => {
         if (confirm('Realmente deseja apagar?')) {
-            PessoasService.deleteById(id)
+            CidadesService.deleteById(id)
                 .then(result => {
                     if (result instanceof Error) {
                         alert(result.message)
                     } else {
                         alert('Registro apagado com sucesso')
-                        navigate('/pessoas')
+                        navigate('/cidades')
                     }
                 })
         }
     }
-
     return (
         <LayoutBaseDePagina
-            titulo={id === 'nova' ? 'Nova Pessoa' : nome}
+            titulo={id === 'nova' ? 'Nova Cidade' : nome}
             barraDeFerramentas={<FerramentasDeDetalhe
                 textoBotaoNovo='Nova'
                 mostrarBotaoSalvarEFechar
@@ -125,8 +117,8 @@ export const DetalhesDePessoas: React.FC = () => {
                 aoClicarEmSalvar={save}
                 aoClicarEmSalvarEFechar={saveAndClose}
                 aoClicarEmApagar={() => handleDelete(Number(id))}
-                aoClicarEmNovo={() => navigate('/pessoas/detalhe/nova')}
-                aoClicarEmVoltar={() => navigate('/pessoas/')}
+                aoClicarEmNovo={() => navigate('/cidades/detalhe/nova')}
+                aoClicarEmVoltar={() => navigate('/cidades/')}
             />}
         >
             <VForm ref={formRef} onSubmit={handleSave}>
@@ -152,31 +144,9 @@ export const DetalhesDePessoas: React.FC = () => {
                                 <VTextField
                                     disabled={isLoading}
                                     fullWidth
-                                    label='Nome Completo'
-                                    name='nomeCompleto'
+                                    label='Nome'
+                                    name='nome'
                                     onChange={e => setNome(e.target.value)}
-                                />
-                            </Grid>
-                        </Grid>
-
-                        <Grid container item direction='row' spacing={2}>
-                            <Grid item xs={12} md={6} lg={4} xl={2}>
-                                <VTextField
-                                    disabled={isLoading}
-                                    fullWidth
-                                    label='Email'
-                                    name='email'
-                                />
-                            </Grid>
-                        </Grid>
-
-                        <Grid container item direction='row' spacing={2}>
-                            <Grid item xs={12} md={6} lg={4} xl={2}>
-                                <VTextField
-                                    fullWidth
-                                    disabled={isLoading}
-                                    label='Cidade'
-                                    name='cidadeId'
                                 />
                             </Grid>
                         </Grid>
@@ -186,7 +156,5 @@ export const DetalhesDePessoas: React.FC = () => {
                 </Box>
             </VForm>
         </LayoutBaseDePagina>
-
-
     )
 }
