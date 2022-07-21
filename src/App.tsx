@@ -3,6 +3,7 @@ import { AppRoutes } from './routes'
 import { MenuLateral } from './shares/components'
 import { DrawerProvider } from './shares/contexts'
 import { AppThemeProvider } from './shares/contexts/ThemeContext'
+import './shares/forms/TraducoesYup'
 
 
 export const App = () => {
