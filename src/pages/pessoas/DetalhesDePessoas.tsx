@@ -7,6 +7,7 @@ import { LayoutBaseDePagina } from '../../shares/layouts'
 import { PessoasService } from '../../shares/services/api/pessoas/PessoasService'
 import * as yup from 'yup'
 import '../../shares/forms/TraducoesYup'
+import { AutoCompleteCidade } from './components/AutoCompleteCidade'
 
 interface IFormData {
     email: string
@@ -55,9 +56,10 @@ export const DetalhesDePessoas: React.FC = () => {
 
 
     const handleSave = (dados: IFormData) => {
+        console.log(dados)
         formValidationSchema
             .validate(dados, { abortEarly: false })
-            .then((dadosValidados) =>{
+            .then((dadosValidados) => {
                 if (id === 'nova') {
                     PessoasService.create(dadosValidados)
                         .then((result) => {
@@ -85,7 +87,7 @@ export const DetalhesDePessoas: React.FC = () => {
                         })
                 }
             })
-            .catch((errors: yup.ValidationError) =>{
+            .catch((errors: yup.ValidationError) => {
                 setIsLoading(false)
                 const validationErrors: IVFormErrors = {}
 
@@ -96,7 +98,7 @@ export const DetalhesDePessoas: React.FC = () => {
                 })
 
                 formRef.current?.setErrors(validationErrors)
-            }) 
+            })
     }
 
     const handleDelete = (id: number) => {
@@ -172,12 +174,7 @@ export const DetalhesDePessoas: React.FC = () => {
 
                         <Grid container item direction='row' spacing={2}>
                             <Grid item xs={12} md={6} lg={4} xl={2}>
-                                <VTextField
-                                    fullWidth
-                                    disabled={isLoading}
-                                    label='Cidade'
-                                    name='cidadeId'
-                                />
+                                <AutoCompleteCidade isExternalLoading={isLoading} />
                             </Grid>
                         </Grid>
 

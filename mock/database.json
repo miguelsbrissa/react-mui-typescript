@@ -4,7 +4,7 @@
       "id": 1,
       "nomeCompleto": "David Bowman",
       "email": "davidbowman@gmail.com",
-      "cidadeId": 1
+      "cidadeId": 4
     },
     {
       "id": 2,
@@ -129,6 +129,18 @@
     {
       "nome": "Adarlan",
       "id": 5
+    },
+    {
+      "nome": "Hogwarts",
+      "id": 6
+    },
+    {
+      "nome": "Wakanda",
+      "id": 7
+    },
+    {
+      "nome": "Asgard",
+      "id": 8
     }
   ]
 }
