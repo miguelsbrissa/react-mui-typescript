@@ -142,5 +142,8 @@
       "nome": "Asgard",
       "id": 8
     }
-  ]
+  ],
+  "auth": {
+    "accessToken": "dsakjdhgaksjdhkasdhkasdahkj.dhksjaghdjasgfdhjasfdags"
+  }
 }

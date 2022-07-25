@@ -1,13 +1,105 @@
-import { FerramentasDaListagem, FerramentasDeDetalhe } from '../../shares/components'
+import { Box, Card, CardContent, CircularProgress, debounce, Grid, Typography } from '@mui/material'
+import { useEffect, useState } from 'react'
+import { FerramentasDaListagem } from '../../shares/components'
 import { LayoutBaseDePagina } from '../../shares/layouts'
+import { CidadesService } from '../../shares/services/api/cidades/CidadesServcice'
+import { PessoasService } from '../../shares/services/api/pessoas/PessoasService'
 
 export const Dashboard = () => {
+    const [isLoadingCidades, setIsLoadingCidades] = useState(true)
+    const [totalCountCidades, setTotalCountCidades] = useState(0)
+    const [isLoadingPessoas, setIsLoadingPessoas] = useState(true)
+    const [totalCountPessoas, setTotalCountPessoas] = useState(0)
+
+    useEffect(() => {
+        setIsLoadingCidades(true)
+
+
+        CidadesService.getAll(1)
+            .then((result) => {
+                setIsLoadingCidades(false)
+                if (result instanceof Error) {
+                    alert(result.message)
+                } else {
+                    setTotalCountCidades(result.totalCount)
+                }
+            })
+
+
+    }, [])
+    useEffect(() => {
+        setIsLoadingPessoas(true)
+        PessoasService.getAll(1)
+            .then((result) => {
+                setIsLoadingPessoas(false)
+                if (result instanceof Error) {
+                    alert(result.message)
+                } else {
+                    setTotalCountPessoas(result.totalCount)
+                }
+            })
+
+
+    }, [])
+
+
     return (
         <LayoutBaseDePagina
             titulo='Página Inicial'
-            barraDeFerramentas={<FerramentasDeDetalhe  mostrarBotaoSalvarEFechar/>}
+            barraDeFerramentas={<FerramentasDaListagem mostrarBotaoNovo={false} />}
         >
-            Testando
+            <Box width='100%' display='flex'>
+                <Grid container margin={1}>
+                    <Grid item container spacing={2}>
+
+                        <Grid item xs={12} sm={12} md={6} lg={4} xl={3}>
+
+                            <Card>
+                                <CardContent>
+                                    <Typography variant='h5' align='center'>
+                                        Total de pessoas
+                                    </Typography>
+
+                                    <Box padding={6} display='flex' justifyContent='center' alignItems='center'>
+                                        {!isLoadingPessoas && (
+                                            <Typography variant='h1'>
+                                                {totalCountPessoas}
+                                            </Typography>
+                                        )}
+                                        {isLoadingPessoas && (
+                                            <CircularProgress size={50} />
+                                        )}
+                                    </Box>
+                                </CardContent>
+                            </Card>
+
+                        </Grid>
+                        <Grid item xs={12} sm={12} md={6} lg={4} xl={3}>
+
+                            <Card>
+                                <CardContent>
+                                    <Typography variant='h5' align='center'>
+                                        Total de cidades
+                                    </Typography>
+
+                                    <Box padding={6} display='flex' justifyContent='center' alignItems='center'>
+                                        {!isLoadingCidades && (
+                                            <Typography variant='h1'>
+                                                {totalCountCidades}
+                                            </Typography>
+                                        )}
+                                        {isLoadingCidades && (
+                                            <CircularProgress size={50} />
+                                        )}
+                                    </Box>
+                                </CardContent>
+                            </Card>
+
+                        </Grid>
+
+                    </Grid>
+                </Grid>
+            </Box>
         </LayoutBaseDePagina>
     )
 }
