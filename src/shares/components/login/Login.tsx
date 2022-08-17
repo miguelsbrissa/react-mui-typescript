@@ -60,7 +60,7 @@ export const Login: React.FC<ILoginProps> = ({ children }) => {
                             fullWidth
                             value={email}
                             onChange={e => setEmail(e.target.value)}
-                            onKeyDown={e => setEmailError('')}
+                            onKeyDown={_e => setEmailError('')}
                             error={!!email}
                             helperText={emailError}
                             disabled={isLoading}
@@ -70,7 +70,7 @@ export const Login: React.FC<ILoginProps> = ({ children }) => {
                             type='password'
                             value={senha}
                             onChange={e => setSenha(e.target.value)}
-                            onKeyDown={e => setSenhaError('')}
+                            onKeyDown={_e => setSenhaError('')}
                             fullWidth
                             error={!!senha}
                             helperText={senhaError}
