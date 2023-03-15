@@ -112,27 +112,27 @@
   "cidades": [
     {
       "id": 1,
-      "nome": "Star Wars"
+      "nome": "Aldeeran"
     },
     {
       "id": 2,
-      "nome": "Dune "
+      "nome": "Arrakis"
     },
     {
       "id": 3,
-      "nome": "Mundo Novo"
+      "nome": "Tatooine"
     },
     {
       "id": 4,
-      "nome": "2001: Odisseia no espaço"
+      "nome": "São Paulo"
     },
     {
-      "nome": "Adarlan",
-      "id": 5
+      "id": 5,
+      "nome": "Coruscant"
     },
     {
-      "nome": "Hogwarts",
-      "id": 6
+      "id": 6,
+      "nome": "Kamino"
     },
     {
       "nome": "Wakanda",
